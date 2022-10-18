@@ -9,7 +9,7 @@ stages:
 test:
   stage: testing
   only:
-    - master
+    - main
   script:
     - echo TODO:Testing
 
@@ -17,10 +17,9 @@ deploy:
   stage: deployment
   interruptible: true
   only:
-    - master
+    - main
   script:
-    # currently we do not have sensitive info in .env, so .env is not ignored from git
-    # - cp $ENV .env
+    - cp $ENV .env
     - sudo apt-get install -y python3-pip
     - sudo pip3 install --upgrade setuptools
     - sudo pip3 install docker-compose
