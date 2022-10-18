@@ -23,8 +23,9 @@ const Loading: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const { value } = useAsync(async () => {
     if (!client) return;
+
     return await client?.isUserAuthorized();
-  }, [client]);
+  }, [client, router.route]);
 
   const eventHandler = useCallback(
     async (e: any) => {
@@ -43,6 +44,15 @@ const Loading: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   if (!client?.connected || typeof value === "undefined")
     return <>Loading...</>;
+  if (value === false && router.route !== "/auth") {
+    router.push("/auth");
+    return null;
+  }
+  if (value === true && router.route === "/auth") {
+    router.push("/");
+    return null;
+  }
+  console.log({ value });
 
   return <>{children}</>;
 };

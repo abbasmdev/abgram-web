@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling from "qr-code-styling";
-import { useTelegram } from "../../core/telegram";
 import { useRouter } from "next/router";
-import { useAsync } from "react-use";
+import QRCodeStyling from "qr-code-styling";
+import { useEffect, useRef } from "react";
+import { useTelegram } from "../../core/telegram";
 
 const qrCode = new QRCodeStyling({
   width: 240,
@@ -20,14 +19,16 @@ const qrCode = new QRCodeStyling({
 
 const AuthQR = () => {
   const ref = useRef<HTMLDivElement>(null);
-
+  const qrRequestRef = useRef(false);
   const router = useRouter();
 
   const { client, apiHash, apiId } = useTelegram();
 
-  useAsync(async () => {
-    if (!client) return;
-    return await client
+  useEffect(() => {
+    if (!client || qrRequestRef.current) return;
+    qrRequestRef.current = true;
+
+    client
       ?.signInUserWithQrCode(
         {
           apiHash,
@@ -39,6 +40,7 @@ const AuthQR = () => {
               .replace(/\+/g, "-")
               .replace(/\//g, "_")
               .replace(/=+$/, "");
+
             qrCode.update({ data: `tg://login?token=${token}` });
           },
           onError(err) {
@@ -49,8 +51,11 @@ const AuthQR = () => {
       .then(() => {
         router.push("/");
       })
-      .catch((e) => {});
-  });
+      .catch((e) => {})
+      .finally(() => {
+        qrRequestRef.current = false;
+      });
+  }, [apiHash, apiId, client, router]);
 
   useEffect(() => {
     if (ref.current) qrCode.append(ref.current);
