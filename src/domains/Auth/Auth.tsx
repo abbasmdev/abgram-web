@@ -6,9 +6,6 @@ const AuthQR = dynamic(() => import("./AuthQR"), { ssr: false });
 const Auth = () => {
   return (
     <>
-      <Head>
-        <title>Abogram Web - QR Login</title>
-      </Head>
       <div className="flex items-center justify-center h-screen">
         <main className="flex flex-col gap-10 items-center">
           <AuthQR />

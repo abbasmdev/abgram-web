@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useTelegram } from "../core/telegram";
+import Home from "../domains/Home/Home";
 
-const Home: NextPage = () => {
-  const { client } = useTelegram();
-
+const HomePage: NextPage = () => {
   return (
     <>
       <Head>
@@ -13,11 +11,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="text-teal-700">Hi</h1>
-      </main>
+      <Home />
     </>
   );
 };
 
-export default Home;
+export default HomePage;

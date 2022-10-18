@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { useTelegram } from "../../core/telegram";
 import { useRouter } from "next/router";
+import { useAsync } from "react-use";
 
 const qrCode = new QRCodeStyling({
   width: 240,
@@ -19,16 +20,14 @@ const qrCode = new QRCodeStyling({
 
 const AuthQR = () => {
   const ref = useRef<HTMLDivElement>(null);
+
   const router = useRouter();
 
   const { client, apiHash, apiId } = useTelegram();
-  useEffect(() => {
-    if (ref.current) qrCode.append(ref.current);
-  }, []);
-  useEffect(() => {
-    if (!client) return;
 
-    client
+  useAsync(async () => {
+    if (!client) return;
+    return await client
       ?.signInUserWithQrCode(
         {
           apiHash,
@@ -48,10 +47,14 @@ const AuthQR = () => {
         }
       )
       .then(() => {
-        router.replace("/");
+        router.push("/");
       })
-      .catch(() => {});
-  }, [apiHash, apiId, client, router]);
+      .catch((e) => {});
+  });
+
+  useEffect(() => {
+    if (ref.current) qrCode.append(ref.current);
+  }, []);
 
   return <div ref={ref} />;
 };

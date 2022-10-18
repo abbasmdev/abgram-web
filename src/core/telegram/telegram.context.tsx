@@ -53,8 +53,9 @@ const TelegramContext = React.createContext<ReturnType<
 > | null>(null);
 
 const TelegramProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const store = useTelegramStore();
   return (
-    <TelegramContext.Provider value={useTelegramStore()}>
+    <TelegramContext.Provider value={store}>
       {children}
     </TelegramContext.Provider>
   );
