@@ -1,11 +1,14 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { TelegramProvider } from "../core/telegram";
+import { AuthProvider } from "../domains/Auth/Auth.context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <TelegramProvider>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </TelegramProvider>
   );
 }
