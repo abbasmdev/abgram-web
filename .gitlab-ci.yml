@@ -1,0 +1,29 @@
+image: docker
+services:
+  - docker:dind
+
+stages:
+  - testing
+  - deployment
+
+test:
+  stage: testing
+  only:
+    - master
+  script:
+    - echo TODO:Testing
+
+deploy:
+  stage: deployment
+  interruptible: true
+  only:
+    - master
+  script:
+    # currently we do not have sensitive info in .env, so .env is not ignored from git
+    # - cp $ENV .env
+    - sudo apt-get install -y python3-pip
+    - sudo pip3 install --upgrade setuptools
+    - sudo pip3 install docker-compose
+    - sudo docker-compose  build
+    - sudo docker-compose up -d
+  environment: production
