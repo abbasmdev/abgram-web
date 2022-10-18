@@ -1,7 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useTelegram } from "../core/telegram";
 
 const Home: NextPage = () => {
+  const { client } = useTelegram();
+
   return (
     <>
       <Head>
