@@ -1,52 +1,12 @@
-import { FC, useEffect, useId, useMemo, useRef, useState } from "react";
-import { useAsync } from "react-use";
+import { FC, useEffect, useRef } from "react";
 import { Api } from "telegram";
-import { NewMessage, NewMessageEvent } from "telegram/events";
-import { useTelegram } from "../../core/telegram";
 
-const Messages: FC<{ userId: bigInt.BigInteger }> = ({ userId }) => {
-  const { client } = useTelegram();
+const Messages: FC<{
+  messages: Api.Message[];
+  loading: boolean;
+  error: Error;
+}> = ({ messages, error, loading }) => {
   const listRef = useRef<HTMLOListElement>();
-  const [messages, setMessages] = useState<Api.Message[]>([]);
-
-  const { value, loading, error } = useAsync(async () => {
-    return await client?.invoke(
-      new Api.messages.GetHistory({
-        peer: new Api.InputPeerUser({ userId: userId, accessHash: undefined }),
-        limit: 100,
-      })
-    );
-  });
-
-  useEffect(() => {
-    if (
-      value?.className === "messages.MessagesSlice" ||
-      value?.className === "messages.Messages"
-    ) {
-      setMessages(
-        value?.messages
-          ?.filter((m) => m.className === "Message")
-          .reverse() as Api.Message[]
-      );
-    }
-  }, [value]);
-
-  useEffect(() => {
-    async function handler(event: NewMessageEvent) {
-      setMessages((pre) => [...pre, event.message]);
-    }
-    client.addEventHandler(
-      handler,
-      new NewMessage({
-        func(event) {
-          return userId.eq(event.chatId);
-        },
-      })
-    );
-    return () => {
-      client.removeEventHandler(handler, new NewMessage({}));
-    };
-  }, [client, userId]);
 
   useEffect(() => {
     if (messages.length > 0 && listRef.current) {
