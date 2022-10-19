@@ -9,7 +9,9 @@ type StoreReducerState = {
 };
 
 function createClient(apiId: number, apiHash: string) {
-  return new TelegramClient(new StoreSession(""), apiId, apiHash, {});
+  return new TelegramClient(new StoreSession(""), apiId, apiHash, {
+    useWSS: true,
+  });
 }
 
 const useTelegramStore = () => {

@@ -16,7 +16,6 @@ const Header = () => {
   const router = useRouter();
   async function handleLogout() {
     const res = await client?.invoke(new Api.auth.LogOut());
-    console.log(res);
   }
 
   return (

@@ -43,9 +43,7 @@ const AuthQR = () => {
 
             qrCode.update({ data: `tg://login?token=${token}` });
           },
-          onError(err) {
-            console.log(err);
-          },
+          onError(err) {},
         }
       )
       .then(() => {

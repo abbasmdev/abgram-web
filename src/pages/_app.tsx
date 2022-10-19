@@ -29,8 +29,6 @@ const Loading: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const eventHandler = useCallback(
     async (e: any) => {
-      console.log(e);
-
       if (e.className === "UpdatesTooLong") router.replace("/auth");
     },
     [router]
@@ -52,7 +50,6 @@ const Loading: FC<{ children: React.ReactNode }> = ({ children }) => {
     router.push("/");
     return null;
   }
-  console.log({ value });
 
   return <>{children}</>;
 };
