@@ -16,7 +16,7 @@ const Home = () => {
     <div className="h-screen flex flex-col overflow-hidden">
       <Header />
       <main className="flex-1 overflow-y-scroll">
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-1">
           <ConversationItem />
           <ConversationItem />
           <ConversationItem />
