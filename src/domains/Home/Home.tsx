@@ -1,17 +1,7 @@
-import React from "react";
-
 import ConversationItem from "./ConversationItem";
-import { useTelegram } from "../../core/telegram";
-import { useAsync } from "react-use";
-import { Api } from "telegram";
 import Header from "./Header";
 
 const Home = () => {
-  const { client } = useTelegram();
-  const { value, error, loading } = useAsync(async () => {
-    return await client?.invoke(new Api.contacts.GetContacts({}));
-  });
-
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Header />

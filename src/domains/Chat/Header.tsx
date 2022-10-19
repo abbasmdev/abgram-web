@@ -2,14 +2,13 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import bigInt from "big-integer";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useAsync } from "react-use";
 import { Api } from "telegram";
 import { useTelegram } from "../../core/telegram";
-const Header = () => {
-  const router = useRouter();
-  const userId = bigInt(router.query.id as string);
+const Header: FC<{ userId: bigInt.BigInteger }> = ({ userId }) => {
   const { client } = useTelegram();
+  const router = useRouter();
 
   const { value: contact } = useAsync(async () => {
     return await client?.invoke(
