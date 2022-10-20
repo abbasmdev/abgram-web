@@ -70,7 +70,7 @@ const Chat = () => {
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Header userId={userId} />
-      <main className="flex-1 bg-gray-200 flex flex-col overflow-hidden">
+      <main className="flex-1 bg-gray-200 flex flex-col overflow-hidden pt-2">
         <div className="overflow-y-auto flex-1 px-2">
           <Messages messages={messages} error={error} loading={loading} />
         </div>

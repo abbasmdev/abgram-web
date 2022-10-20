@@ -1,4 +1,4 @@
-import ConversationItem from "./ConversationItem";
+import Dialogs from "./Dialogs";
 import Header from "./Header";
 
 const Home = () => {
@@ -6,37 +6,7 @@ const Home = () => {
     <div className="h-screen flex flex-col overflow-hidden">
       <Header />
       <main className="flex-1 overflow-y-scroll">
-        <ul className="flex flex-col gap-1">
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-          <ConversationItem />
-        </ul>
+        <Dialogs />
       </main>
     </div>
   );

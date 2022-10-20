@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { TelegramClient } from "telegram";
 import { StoreSession } from "telegram/sessions";
 
