@@ -1,7 +1,5 @@
 # Abgram - Unofficial Telegram web
 
-## preview links
+## preview link
 
-https://abgram.abbastech.ir
-
-https://abgram-vercel.abbastech.ir
+https://abgram.abbasm.dev
