@@ -5,7 +5,7 @@ const AuthPage = () => {
   return (
     <>
       <Head>
-        <title>Abogram Web - QR Login</title>
+        <title>Abgram Web - QR Login</title>
       </Head>
       <Auth />;
     </>
